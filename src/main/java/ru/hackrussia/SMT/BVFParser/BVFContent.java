@@ -17,6 +17,7 @@ public class BVFContent {
      * @throws NoSuchFrameException
      */
     public Skeleton getRelativeSkeleton(Integer frame) throws NoSuchFrameException {return null;}
+    public Integer getFramesCount() {return null;}
 
     private class InnerStructureTree {
         private String name;
