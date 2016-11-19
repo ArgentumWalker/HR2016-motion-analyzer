@@ -12,27 +12,23 @@ import java.util.ArrayList;
 public class StepCounterMetric implements MetricsInterface {
     static final Double koef = 0.1;
     private Double leftLegMin;
-    private Double leftLegPreviousMin;
     private Double rightLegMin;
-    private Double rightLegPreviousMin;
-    private Double leftLegPreviousMax;
     private Double leftLegMax;
-    private Double rightLegPreviousMax;
     private Double rightLegMax;
     private Double stepCount;
+    private Double leftZero;
+    private Double rightZero;
     private Boolean leftRise;
     private Boolean rightRise;
 
     public StepCounterMetric() {
         stepCount = 0.0;
-        leftLegMin = 10000000000.0;
-        leftLegPreviousMin = 10000000000.0;
-        rightLegMin = 100000000000.0;
-        rightLegPreviousMin = 100000000000.0;
-        leftLegMax = -10000000000.0;
-        leftLegPreviousMax = -100000000000.0;
-        rightLegMax = -100000000000.0;
-        rightLegPreviousMax = -100000000000.0;
+        leftLegMin = 20000000000.0;
+        rightLegMin = 200000000000.0;
+        leftLegMax = 0.0;
+        rightLegMax = 0.0;
+        leftZero = 10000000000.0;
+        rightZero = 10000000000.0;
         leftRise = false;
         rightRise = false;
     }
@@ -40,6 +36,14 @@ public class StepCounterMetric implements MetricsInterface {
     public Double calculate(BVFContent.Skeleton skeleton) {
         Double rightLeg = skeleton.getByName("RightUpLeg").getRelativeOffset().get(1); //Vertical Axis
         Double leftLeg = skeleton.getByName("LeftUpLeg").getRelativeOffset().get(1); //Vertical Axis
+        if (rightZero > rightLeg) {
+            rightZero = rightLeg;
+        }
+        if (leftZero > leftLeg) {
+            leftZero = leftLeg;
+        }
+        rightLeg -= rightZero;
+        leftLeg -= leftZero;
         Boolean haveStep = false;
         if (leftRise) {
             if (leftLegMax > leftLeg * (1 + koef)) {
