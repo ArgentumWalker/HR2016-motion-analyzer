@@ -14,6 +14,8 @@ public class MetricsCalculator {
     private MetricsCalculator() {}
     /** Create calculator for metrics */
     public MetricsCalculator(MetricsInterface metrics) {
+        this.frameStep = 1;
+        this.resultStep = 1;
         this.metrics = metrics;
     }
 
