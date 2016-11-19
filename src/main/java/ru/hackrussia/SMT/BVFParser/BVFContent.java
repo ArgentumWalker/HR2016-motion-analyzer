@@ -185,7 +185,7 @@ public class BVFContent {
             }
             ArrayList<Double> rotation = new ArrayList<Double>();
             for (int i = 0; i < 3; i++) {
-                rotation.add(tree.channelsValuesPerTime.get(frame).get(i+3));
+                rotation.add(Math.toRadians(tree.channelsValuesPerTime.get(frame).get(i+3)));
             }
             for (InnerStructureTree bone : tree.joints) {
                 Skeleton sub = new Skeleton(frame, bone, this, rotation);
@@ -230,7 +230,7 @@ public class BVFContent {
                 }
                 ArrayList<Double> rot = new ArrayList<Double>();
                 for (int i = 0; i < 3; i++) {
-                    rotation.add(tree.channelsValuesPerTime.get(frame).get(i + 3));
+                    rot.add(Math.toRadians(tree.channelsValuesPerTime.get(frame).get(i + 3)));
                 }
                 for (InnerStructureTree bone : tree.joints) {
                     Skeleton sub = new Skeleton(frame, bone, this, rot);
