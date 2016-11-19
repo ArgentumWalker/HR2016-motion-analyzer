@@ -51,7 +51,7 @@ public class BVFContentTest {
                 "{\n" +
                 "    OFFSET 0.0 0.0 0.0\n" +
                 "    CHANNELS 0\n" +
-                "    JOINTS leg\n" +
+                "    JOINT leg\n" +
                 "    {\n" +
                 "        OFFSET 0.0 0.0 0.0\n" +
                 "        CHANNELS 2 channel1 channel2" +
@@ -74,7 +74,7 @@ public class BVFContentTest {
                 "{\n" +
                 "    OFFSET 0.0 0.0 0.0\n" +
                 "    CHANNELS 0\n" +
-                "    JOINTS leg1\n" +
+                "    JOINT leg1\n" +
                 "    {\n" +
                 "        OFFSET 0.0 0.0 0.0\n" +
                 "        CHANNELS 2 channel1 channel2" +
@@ -83,7 +83,7 @@ public class BVFContentTest {
                 "             OFFSET 0.0 0.0 0.0\n" +
                 "        }\n" +
                 "    }\n" +
-                "    JOINTS leg2\n" +
+                "    JOINT leg2\n" +
                 "    {\n" +
                 "        OFFSET 0.0 0.0 0.0\n" +
                 "        CHANNELS 2 channel1 channel2" +
@@ -105,7 +105,7 @@ public class BVFContentTest {
                 "ROOT Hips\n" +
                 "{\n" +
                 "    OFFSET 0.0 0.0 0.0\n" +
-                "    CHANNELS 3 channel1 channel2\n" +
+                "    CHANNELS 3 channel1 channel2 channel3\n" +
                 "    End Site\n" +
                 "    {\n" +
                 "         OFFSET 0.0 0.0 0.0\n" +
@@ -125,7 +125,7 @@ public class BVFContentTest {
                 "ROOT Hips\n" +
                 "{\n" +
                 "    OFFSET 0.0 0.0 0.0\n" +
-                "    CHANNELS 3 channel1 channel2\n" +
+                "    CHANNELS 3 channel1 channel2 channel3\n" +
                 "    End Site\n" +
                 "    {\n" +
                 "         OFFSET 0.0 0.0 0.0\n" +

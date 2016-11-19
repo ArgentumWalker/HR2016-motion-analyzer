@@ -3,6 +3,7 @@ package ru.hackrussia.SMT.BVFParser;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class BVFContent {
@@ -16,10 +17,13 @@ public class BVFContent {
      * @throws BVFParseException
      */
     public BVFContent(InputStream input) throws BVFParseException {
-        Scanner in = new Scanner(input);
+        Scanner in = new Scanner(input).useLocale(Locale.US);
         //Parse Header
         try {
             if (!in.next().equals("HIERARCHY")) {
+                throw new BVFParseException();
+            }
+            if (!in.next().equals("ROOT")) {
                 throw new BVFParseException();
             }
             order = new ArrayList<InnerStructureTree>();
@@ -48,6 +52,9 @@ public class BVFContent {
                 }
             }
 
+        }
+        catch (BVFParseException e) {
+            throw e;
         }
         catch (Exception e) {
             throw new BVFParseException();
@@ -111,7 +118,22 @@ public class BVFContent {
             String tmp = input.next();
             while (!tmp.equals("}")) {
                 if (tmp.equals("End")) {
-                    //Read End Site
+                    if (!input.next().equals("Site")) {
+                        throw new BVFParseException();
+                    }
+                    if (!input.next().equals("{")) {
+                        throw new BVFParseException();
+                    }
+                    if (!input.next().equals("OFFSET")) {
+                        throw new BVFParseException();
+                    }
+                    InnerStructureTree end = new InnerStructureTree(input.nextDouble(), input.nextDouble(), input. nextDouble());
+                    end.parent = this;
+                    joints.add(end);
+                    if (!input.next().equals("}")){
+                        throw new BVFParseException();
+                    }
+                    tmp = input.next();
                     continue;
                 }
                 if (!tmp.equals("JOINT")) {
@@ -120,6 +142,7 @@ public class BVFContent {
                 InnerStructureTree tree = new InnerStructureTree(input, order);
                 tree.parent = this;
                 joints.add(tree);
+                tmp = input.next();
             }
             channelsValuesPerTime = new ArrayList<ArrayList<Double>>();
         }
