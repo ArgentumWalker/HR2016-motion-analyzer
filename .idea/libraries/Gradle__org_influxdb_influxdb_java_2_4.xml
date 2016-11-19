@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.influxdb:influxdb-java:2.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.influxdb/influxdb-java/2.4/fd0e095183ced1596120a1e3a724c146b30c59a5/influxdb-java-2.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.influxdb/influxdb-java/2.4/df29bd574ff554b4e3c68ce65d51a01f3da439cc/influxdb-java-2.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
