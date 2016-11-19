@@ -64,7 +64,12 @@ public class BVFContent {
     /** Return RelativeSkeleton for frame number
      * @throws NoSuchFrameException
      */
-    public Skeleton getRelativeSkeleton(Integer frame) throws NoSuchFrameException {return null;}
+    public Skeleton getRelativeSkeleton(Integer frame) throws NoSuchFrameException {
+        if (frame >= frameCount) {
+            throw new NoSuchFrameException();
+        }
+        return new Skeleton(frame, root);
+    }
     public Integer getFramesCount() {
         return frameCount;
     }
@@ -149,13 +154,97 @@ public class BVFContent {
     }
 
     public class Skeleton {
-        private ArrayList<Double> relativePosition;
+        private ArrayList<Double> relativeOffset;
+        private ArrayList<Double> relativeRotation;
+        private ArrayList<Double> absoluteOffset;
+        private ArrayList<Double> absoluteRotation;
+        private ArrayList<Double> absolutePosition;
         private ArrayList<Skeleton> joints;
         private HashMap<String, Skeleton> namedBones;
 
         private Skeleton() {}
-        private Skeleton(Integer frame, InnerStructureTree tree) {}
-        private Skeleton(Integer frame, InnerStructureTree tree, ArrayList<Double> parentAbsolutePosition) {}
+        //Constructor for Root
+        private Skeleton(Integer frame, InnerStructureTree tree) {
+            relativeOffset = new ArrayList<Double>();
+            relativeRotation = new ArrayList<Double>();
+            absolutePosition = new ArrayList<Double>();
+            absoluteOffset = new ArrayList<Double>();
+            absoluteRotation = new ArrayList<Double>();
+            joints = new ArrayList<Skeleton>();
+            namedBones = new HashMap<String, Skeleton>();
+            namedBones.put(tree.name, this);
+            for (int i = 0; i < 3; i++) {
+                relativeOffset.add(0.0);
+                relativeRotation.add(0.0);
+                absoluteOffset.add(0.0);
+                absoluteRotation.add(0.0);
+                absolutePosition.add(tree.channelsValuesPerTime.get(frame).get(i) + tree.offset.get(i));
+            }
+            ArrayList<Double> rotation = new ArrayList<Double>();
+            for (int i = 0; i < 3; i++) {
+                rotation.add(tree.channelsValuesPerTime.get(frame).get(i+3));
+            }
+            for (InnerStructureTree bone : tree.joints) {
+                Skeleton sub = new Skeleton(frame, bone, this, rotation);
+                joints.add(sub);
+                namedBones.putAll(sub.namedBones);
+            }
+        }
+        //Constructor for Joint
+        private Skeleton(Integer frame, InnerStructureTree tree, Skeleton parent, ArrayList<Double> rotation) {
+            relativeOffset = new ArrayList<Double>();
+            relativeRotation = rotation;
+            absolutePosition = new ArrayList<Double>();
+            absoluteOffset = new ArrayList<Double>();
+            absoluteRotation = new ArrayList<Double>();
+            Double cx = Math.cos(rotation.get(0));
+            Double sx = Math.sin(rotation.get(0));
+            Double cy = Math.cos(rotation.get(1));
+            Double sy = Math.sin(rotation.get(1));
+            Double cz = Math.cos(rotation.get(2));
+            Double sz = Math.sin(rotation.get(2));
+            ArrayList<Double> a1 = new ArrayList<Double>();
+            ArrayList<Double> a2 = new ArrayList<Double>();
+            ArrayList<Double> a3 = new ArrayList<Double>();
+            a1.add(cy * cz);
+            a2.add(cz * sx * sy + cx * sz);
+            a3.add(sx * sz - cx * cz * sy);
+            a1.add(- cy * sz);
+            a2.add(cx * cz - sx * sy * sz);
+            a3.add(cz * cx + cx * sy * sz);
+            a1.add(sy);
+            a2.add(- cy * sx);
+            a3.add(cy * cx);
+            if (tree.channelsValuesPerTime.size() > 0) {
+                for (int i = 0; i < 3; i++) {
+                    relativeOffset.add(a1.get(i) * tree.offset.get(1) +
+                            a2.get(i) * tree.offset.get(2) +
+                            a3.get(i) * tree.offset.get(3) +
+                            tree.channelsValuesPerTime.get(frame).get(i));
+                    absolutePosition.add(parent.absolutePosition.get(i) + relativeOffset.get(i));
+                    absoluteOffset.add(parent.absoluteOffset.get(i) + relativeOffset.get(i));
+                    absoluteRotation.add(parent.absoluteRotation.get(i) + rotation.get(i));
+                }
+                ArrayList<Double> rot = new ArrayList<Double>();
+                for (int i = 0; i < 3; i++) {
+                    rotation.add(tree.channelsValuesPerTime.get(frame).get(i + 3));
+                }
+                for (InnerStructureTree bone : tree.joints) {
+                    Skeleton sub = new Skeleton(frame, bone, this, rot);
+                    joints.add(sub);
+                    namedBones.putAll(sub.namedBones);
+                }
+            } else {
+                for (int i = 0; i < 3; i++) {
+                    relativeOffset.add(a1.get(i) * tree.offset.get(1) +
+                            a2.get(i) * tree.offset.get(2) +
+                            a3.get(i) * tree.offset.get(3));
+                    absolutePosition.add(parent.absolutePosition.get(i) + relativeOffset.get(i));
+                    absoluteOffset.add(parent.absoluteOffset.get(i) + relativeOffset.get(i));
+                    absoluteRotation.add(parent.absoluteRotation.get(i) + rotation.get(i));
+                }
+            }
+        }
 
         /** Return bone with such name */
         public Skeleton getByName(String name) {return null;}
