@@ -1,14 +1,9 @@
 package ru.hackrussia.SMT.MetricsSamples;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import ru.hackrussia.SMT.BVFParser.BVFContent;
 import ru.hackrussia.SMT.MetricsCalculator.MetricsInterface;
 
-import java.util.ArrayList;
 
-/**
- * Created by ArgentumWalker on 19.11.16.
- */
 public class StepCounterMetric implements MetricsInterface {
     static final Double koef = 0.1;
     private Double leftLegMin;
