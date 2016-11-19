@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class BVFContent {
     private InnerStructureTree root;
-    private ArrayList<InnerStructureTree> order;
+    private ArrayList<String> names;
     private Integer frameCount;
     private Double frameTime;
 
@@ -16,8 +16,9 @@ public class BVFContent {
     /** Parse BVF file
      * @throws BVFParseException
      */
-    public BVFContent(InputStream input) throws BVFParseException {
+    public BVFContent(InputStream input) throws Exception {
         Scanner in = new Scanner(input).useLocale(Locale.US);
+        names = new ArrayList<String>();
         //Parse Header
         try {
             if (!in.next().equals("HIERARCHY")) {
@@ -26,7 +27,7 @@ public class BVFContent {
             if (!in.next().equals("ROOT")) {
                 throw new BVFParseException();
             }
-            order = new ArrayList<InnerStructureTree>();
+            ArrayList<InnerStructureTree> order = new ArrayList<InnerStructureTree>();
             root = new InnerStructureTree(in, order);
             if (!in.next().equals("MOTION")) {
                 throw new BVFParseException();
@@ -57,8 +58,19 @@ public class BVFContent {
             throw e;
         }
         catch (Exception e) {
-            throw new BVFParseException();
+            throw e;
         }
+      //  catch (Exception e) {
+      //      throw new BVFParseException();
+      //  }
+    }
+
+    public ArrayList<String> getNames() {
+        return names;
+    }
+
+    public Long getFrameTime() {
+        return Math.round(frameTime * 1000.0);
     }
 
     /** Return RelativeSkeleton for frame number
@@ -97,6 +109,7 @@ public class BVFContent {
         public InnerStructureTree(Scanner input, ArrayList<InnerStructureTree> order) throws BVFParseException {
             order.add(this);
             name = input.next();
+            names.add(name);
             parent = null;
             if (!input.next().equals("{")) {
                 throw new BVFParseException();
@@ -178,42 +191,37 @@ public class BVFContent {
             namedBones.put(tree.name, this);
             for (int i = 0; i < 3; i++) {
                 relativeOffset.add(0.0);
-                relativeRotation.add(0.0);
+                relativeRotation.add(Math.toRadians(tree.channelsValuesPerTime.get(frame).get(i + 3)));
                 absoluteOffset.add(0.0);
                 absoluteRotation.add(0.0);
-                absolutePosition.add(tree.channelsValuesPerTime.get(frame).get(i) + tree.offset.get(i));
-            }
-            ArrayList<Double> rotation = new ArrayList<Double>();
-            for (int i = 0; i < 3; i++) {
-                rotation.add(Math.toRadians(tree.channelsValuesPerTime.get(frame).get(i+3)));
+                absolutePosition.add(tree.channelsValuesPerTime.get(frame).get(i));
             }
             for (InnerStructureTree bone : tree.joints) {
-                Skeleton sub = new Skeleton(frame, bone, this, rotation);
+                Skeleton sub = new Skeleton(frame, bone, this);
                 joints.add(sub);
                 namedBones.putAll(sub.namedBones);
             }
         }
         //Constructor for Joint
-        private Skeleton(Integer frame, InnerStructureTree tree, Skeleton parent, ArrayList<Double> rotation) {
+        private Skeleton(Integer frame, InnerStructureTree tree, Skeleton parent) {
             relativeOffset = new ArrayList<Double>();
             relativeRotation = new ArrayList<Double>();
             absolutePosition = new ArrayList<Double>();
             absoluteOffset = new ArrayList<Double>();
             absoluteRotation = new ArrayList<Double>();
-            if (tree.channelsValuesPerTime.size() > 0) {
+            joints = new ArrayList<Skeleton>();
+            namedBones = new HashMap<String, Skeleton>();
+            if (!tree.name.equals("END")) {
+                namedBones.put(tree.name, this);
                 for (int i = 0; i < 3; i++) {
-                    relativeRotation.add(tree.channelsValuesPerTime.get(frame).get(i+3));
+                    relativeRotation.add(Math.toRadians(tree.channelsValuesPerTime.get(frame).get(i+3)));
                     relativeOffset.add(tree.channelsValuesPerTime.get(frame).get(i));
                     absolutePosition.add(parent.absolutePosition.get(i) + relativeOffset.get(i));
                     absoluteOffset.add(parent.absoluteOffset.get(i) + relativeOffset.get(i));
                     absoluteRotation.add(parent.absoluteRotation.get(i) + relativeRotation.get(i));
                 }
-                ArrayList<Double> rot = new ArrayList<Double>();
-                for (int i = 0; i < 3; i++) {
-                    rot.add(Math.toRadians(tree.channelsValuesPerTime.get(frame).get(i + 3)));
-                }
                 for (InnerStructureTree bone : tree.joints) {
-                    Skeleton sub = new Skeleton(frame, bone, this, rot);
+                    Skeleton sub = new Skeleton(frame, bone, this);
                     joints.add(sub);
                     namedBones.putAll(sub.namedBones);
                 }
@@ -238,9 +246,9 @@ public class BVFContent {
                 a2.add(- cy * sx);
                 a3.add(cy * cx);
                 for (int i = 0; i < 3; i++) {
-                    relativeOffset.add(a1.get(i) * tree.offset.get(1) +
-                            a2.get(i) * tree.offset.get(2) +
-                            a3.get(i) * tree.offset.get(3));
+                    relativeOffset.add(a1.get(i) * tree.offset.get(0) +
+                            a2.get(i) * tree.offset.get(1) +
+                            a3.get(i) * tree.offset.get(2));
                     absolutePosition.add(parent.absolutePosition.get(i) + relativeOffset.get(i));
                     absoluteOffset.add(parent.absoluteOffset.get(i) + relativeOffset.get(i));
                 }
