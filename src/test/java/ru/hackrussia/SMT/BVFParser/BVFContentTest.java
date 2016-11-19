@@ -14,7 +14,7 @@ public class BVFContentTest {
                 "ROOT Hips\n" +
                 "{\n" +
                 "    OFFSET 0.0 0.0 0.0\n" +
-                "    CHANNELS 0\n" +
+                "    CHANNELS 6 c1 c2 c3 c4 c5 c6\n" +
                 "    End Site\n" +
                 "    {\n" +
                 "         OFFSET 0.0 0.0 0.0\n" +
@@ -32,7 +32,7 @@ public class BVFContentTest {
                 "ROOT Hips\n" +
                 "{\n" +
                 "    OFFSET 0.0 0.0 0.0\n" +
-                "    CHANNELS 2 channel1 channel2\n" +
+                "    CHANNELS 6 c1 c2 c3 c4 c5 c6\n" +
                 "    End Site\n" +
                 "    {\n" +
                 "         OFFSET 0.0 0.0 0.0\n" +
@@ -50,11 +50,11 @@ public class BVFContentTest {
                 "ROOT Hips\n" +
                 "{\n" +
                 "    OFFSET 0.0 0.0 0.0\n" +
-                "    CHANNELS 0\n" +
+                "    CHANNELS 6 c1 c2 c3 c4 c5 c6\n" +
                 "    JOINT leg\n" +
                 "    {\n" +
                 "        OFFSET 0.0 0.0 0.0\n" +
-                "        CHANNELS 2 channel1 channel2" +
+                "        CHANNELS 6 c1 c2 c3 c4 c5 c6" +
                 "        End Site\n" +
                 "        {\n" +
                 "             OFFSET 0.0 0.0 0.0\n" +
@@ -73,11 +73,11 @@ public class BVFContentTest {
                 "ROOT Hips\n" +
                 "{\n" +
                 "    OFFSET 0.0 0.0 0.0\n" +
-                "    CHANNELS 0\n" +
+                "    CHANNELS 6 c1 c2 c3 c4 c5 c6\n" +
                 "    JOINT leg1\n" +
                 "    {\n" +
                 "        OFFSET 0.0 0.0 0.0\n" +
-                "        CHANNELS 2 channel1 channel2" +
+                "        CHANNELS 6 c1 c2 c3 c4 c5 c6" +
                 "        End Site\n" +
                 "        {\n" +
                 "             OFFSET 0.0 0.0 0.0\n" +
@@ -86,7 +86,7 @@ public class BVFContentTest {
                 "    JOINT leg2\n" +
                 "    {\n" +
                 "        OFFSET 0.0 0.0 0.0\n" +
-                "        CHANNELS 2 channel1 channel2" +
+                "        CHANNELS 6 c1 c2 c3 c4 c5 c6" +
                 "        End Site\n" +
                 "        {\n" +
                 "             OFFSET 0.0 0.0 0.0\n" +
@@ -105,7 +105,7 @@ public class BVFContentTest {
                 "ROOT Hips\n" +
                 "{\n" +
                 "    OFFSET 0.0 0.0 0.0\n" +
-                "    CHANNELS 3 channel1 channel2 channel3\n" +
+                "    CHANNELS 6 c1 c2 c3 c4 c5 c6\n" +
                 "    End Site\n" +
                 "    {\n" +
                 "         OFFSET 0.0 0.0 0.0\n" +
@@ -115,7 +115,7 @@ public class BVFContentTest {
                 "\n" +
                 "Frames: 1\n" +
                 "Frame Time: 0.017\n" +
-                "0.000 0.000 0.000").getBytes());
+                "0.000 0.000 0.000 0.000 0.000 0.000").getBytes());
         new BVFContent(inpStr);
         //TODO: check order of numbers
     }
@@ -125,7 +125,7 @@ public class BVFContentTest {
                 "ROOT Hips\n" +
                 "{\n" +
                 "    OFFSET 0.0 0.0 0.0\n" +
-                "    CHANNELS 3 channel1 channel2 channel3\n" +
+                "    CHANNELS 6 c1 c2 c3 c4 c5 c6\n" +
                 "    End Site\n" +
                 "    {\n" +
                 "         OFFSET 0.0 0.0 0.0\n" +
@@ -135,10 +135,10 @@ public class BVFContentTest {
                 "\n" +
                 "Frames: 4\n" +
                 "Frame Time: 0.017\n" +
-                "0.000 0.000 0.000\n" +
-                "1.000 1.000 1.000\n" +
-                "2.000 2.000 2.000\n" +
-                "0.000 0.000 0.000\n").getBytes());
+                "0.000 0.000 0.000 0.000 0.000 0.000\n" +
+                "1.000 1.000 1.000 1.000 1.000 1.000\n" +
+                "2.000 2.000 2.000 2.000 2.000 2.000\n" +
+                "0.000 0.000 0.000 0.000 0.000 0.000\n").getBytes());
         new BVFContent(inpStr);
         //TODO: check order of numbers
     }

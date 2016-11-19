@@ -115,6 +115,9 @@ public class BVFContent {
                 throw new BVFParseException();
             }
             Integer channelsCount = input.nextInt();
+            if (channelsCount != 6) {
+                throw new BVFParseException();
+            }
             for (int i = 0; i < channelsCount; i++) {
                 channels.add(input.next());
             }
@@ -247,19 +250,33 @@ public class BVFContent {
         }
 
         /** Return bone with such name */
-        public Skeleton getByName(String name) {return null;}
+        public Skeleton getByName(String name) {
+            return namedBones.get(name);
+        }
         /** Return offset of bone related to parent bone */
-        public ArrayList<Double> getRelativeOffset() {return null;}
+        public ArrayList<Double> getRelativeOffset() {
+            return new ArrayList<Double>(relativeOffset);
+        }
         /** Return rotation of bone related to parent bone */
-        public ArrayList<Double> getRelativeRotation() {return null;}
+        public ArrayList<Double> getRelativeRotation() {
+            return new ArrayList<Double>(relativeRotation);
+        }
         /** Return absolute offset from skeleton root */
-        public ArrayList<Double> getAbsoluteOffset() {return null;}
+        public ArrayList<Double> getAbsoluteOffset() {
+            return new ArrayList<Double>(absoluteOffset);
+        }
         /** Return absolute rotation from skeleton root */
-        public ArrayList<Double> getAbsoluteRotation() {return null;}
+        public ArrayList<Double> getAbsoluteRotation() {
+            return new ArrayList<Double>(absoluteRotation);
+        }
         /** Return absolute position from world center */
-        public ArrayList<Double> getAbsolutePoint() {return null;}
+        public ArrayList<Double> getAbsolutePoint() {
+            return new ArrayList<Double>(absolutePosition);
+        }
         /** Return ArrayList of child Joints */
-        public ArrayList<Skeleton> getJoints() {return null;}
+        public ArrayList<Skeleton> getJoints() {
+            return new ArrayList<Skeleton>(joints);
+        }
     }
 
 }
