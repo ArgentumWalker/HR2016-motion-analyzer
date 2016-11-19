@@ -1,6 +1,7 @@
 package ru.hackrussia.SMT.MetricsCalculator;
 
 import ru.hackrussia.SMT.BVFParser.BVFContent;
+import ru.hackrussia.SMT.BVFParser.NoSuchFrameException;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -34,7 +35,7 @@ public class MetricsCalculator {
                     result.add(res);
                 }
             }
-            catch (NoSuchElementException e) {
+            catch (NoSuchFrameException e) {
                 //No matter what, it can't be truth
             }
             j++;
