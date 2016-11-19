@@ -6,6 +6,7 @@ import org.influxdb.dto.BatchPoints;
 import org.influxdb.dto.Point;
 import ru.hackrussia.SMT.BVFParser.BVFContent;
 import ru.hackrussia.SMT.BVFParser.NoSuchFrameException;
+import ru.hackrussia.SMT.MetricsCalculator.MetricsCalculator;
 import ru.hackrussia.SMT.MetricsCalculator.MetricsInterface;
 import ru.hackrussia.SMT.MetricsCalculator.MultiMetricsCalculator;
 import ru.hackrussia.SMT.MetricsSamples.*;
@@ -18,15 +19,27 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     static public void main(String[] args) {
-        if (args.length != 1) {
+        if (args.length != 1 && args.length != 4) {
             System.out.println("Все очень плохо :(");
         } else {
+            String login;
+            String password;
+            String ip;
+            if (args.length == 4) {
+                login = args[1];
+                password = args[2];
+                ip = args[3];
+            } else {
+                login = "smt_writer";
+                password = "hrrr2016hrrr";
+                ip = "http://159.93.36.125:8086";
+            }
             String filename = args[0];
             String id = filename.substring(filename.lastIndexOf("/") + 1);
             try {
                 InputStream file = new FileInputStream(filename);
                 BVFContent bvf = new BVFContent(file);
-                InfluxDB influxDB = InfluxDBFactory.connect("http://159.93.36.125:8086", "smt_writer", "hrrr2016hrrr");
+                InfluxDB influxDB = InfluxDBFactory.connect(ip, login, password);
                 String dbName = "smt";
                 final long time = System.currentTimeMillis();
                 //Simple things
@@ -61,6 +74,7 @@ public class Main {
                 calculator.put(LeftLegVerticalAxis.class.getName(), new LeftLegVerticalAxis());
                 calculator.put(RightLegVerticalAxis.class.getName(), new RightLegVerticalAxis());
                 calculator.put(StepCounterMetric.class.getName(), new StepCounterMetric());
+                calculator.put(WalkDistance.class.getName(), new WalkDistance());
                 HashMap<String, ArrayList<Double>> res = calculator.calculate(bvf);
                 for (String s : res.keySet()) {
                     ArrayList<Double> reses = res.get(s);
