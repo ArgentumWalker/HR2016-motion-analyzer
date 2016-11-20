@@ -12,6 +12,7 @@ import ru.hackrussia.SMT.MetricsSamples.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -82,7 +83,12 @@ public class Main {
                                 .addField("value", reses.get(i/20)).build());
                     }
                 }
-                influxDB.write(pts);
+                try {
+                    influxDB.write(pts);
+                }
+                catch (Exception e) {
+                    System.out.println("Server connection error");
+                }
             }
             catch (IOException e) {
                 System.out.println("Input file reading error");
