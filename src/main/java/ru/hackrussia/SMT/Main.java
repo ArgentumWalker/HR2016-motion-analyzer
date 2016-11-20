@@ -5,10 +5,12 @@ import org.influxdb.InfluxDBFactory;
 import org.influxdb.dto.BatchPoints;
 import org.influxdb.dto.Point;
 import ru.hackrussia.SMT.BVFParser.BVFContent;
+import ru.hackrussia.SMT.BVFParser.BVFParseException;
 import ru.hackrussia.SMT.MetricsCalculator.MultiMetricsCalculator;
 import ru.hackrussia.SMT.MetricsSamples.*;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     static public void main(String[] args) {
         if (args.length != 1 && args.length != 4) {
-            System.out.println("Все очень плохо :(");
+            System.out.println("Wrong number of arguments");
         } else {
             String login;
             String password;
@@ -44,14 +46,10 @@ public class Main {
                         .retentionPolicy("autogen")
                         .consistency(InfluxDB.ConsistencyLevel.ALL)
                         .build();
-               // Point.Builder point = Point.measurement(id);
                 for (Integer i = 0; i < bvf.getFramesCount(); i += 2) {
                     BVFContent.Skeleton skl = bvf.getRelativeSkeleton(i);
-                //    System.out.println(name);
-                //    Point.Builder point2 = point.tag("BodyPart", name);
                     for (String name : bvf.getNames()) {
                         BVFContent.Skeleton sk = skl.getByName(name);
-                //        Point.Builder point3 = point2.time(time + i * bvf.getFrameTime(), TimeUnit.MILLISECONDS);
                         pts.point(Point.measurement(id)
                                 .tag("BodyPart", name)
                                 .time(time + i * bvf.getFrameTime(), TimeUnit.MILLISECONDS)
@@ -82,8 +80,15 @@ public class Main {
                     }
                 }
                 influxDB.write(pts);
-            } catch (Exception e) {
-                System.out.println("Something wrong!");
+            }
+            catch (IOException e) {
+                System.out.println("Input file reading error");
+            }
+            catch (BVFParseException e) {
+                System.out.println("Input file parse error");
+            }
+            catch (Exception e) {
+                System.out.println("Unknown error");
             }
         }
     }
