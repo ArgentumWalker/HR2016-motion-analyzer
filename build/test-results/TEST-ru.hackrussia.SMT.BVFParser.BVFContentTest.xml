@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.hackrussia.SMT.BVFParser.BVFContentTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2016-11-19T19:24:24" hostname="HomeUnderCloud" time="0.046">
+  <properties/>
+  <testcase name="ConstructorTest_InnerJoint_NotFail" classname="ru.hackrussia.SMT.BVFParser.BVFContentTest" time="0.021"/>
+  <testcase name="ConstructorTest_OnlyRootMultiFrames_NotFail" classname="ru.hackrussia.SMT.BVFParser.BVFContentTest" time="0.005"/>
+  <testcase name="ConstructorTest_MultiJointsTest_NotFail" classname="ru.hackrussia.SMT.BVFParser.BVFContentTest" time="0.007"/>
+  <testcase name="ConstructorTest_OnlyRoot_NotFail" classname="ru.hackrussia.SMT.BVFParser.BVFContentTest" time="0.004"/>
+  <testcase name="ConstructorTest_OnlyRootWithChannels_NotFail" classname="ru.hackrussia.SMT.BVFParser.BVFContentTest" time="0.002"/>
+  <testcase name="ConstructorTest_OnlyRootSingleFrame_NotFail" classname="ru.hackrussia.SMT.BVFParser.BVFContentTest" time="0.003"/>
+  <testcase name="ConstructorTest_SingleJointTest_NotFail" classname="ru.hackrussia.SMT.BVFParser.BVFContentTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

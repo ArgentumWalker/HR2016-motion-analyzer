@@ -5,9 +5,6 @@ import org.influxdb.InfluxDBFactory;
 import org.influxdb.dto.BatchPoints;
 import org.influxdb.dto.Point;
 import ru.hackrussia.SMT.BVFParser.BVFContent;
-import ru.hackrussia.SMT.BVFParser.NoSuchFrameException;
-import ru.hackrussia.SMT.MetricsCalculator.MetricsCalculator;
-import ru.hackrussia.SMT.MetricsCalculator.MetricsInterface;
 import ru.hackrussia.SMT.MetricsCalculator.MultiMetricsCalculator;
 import ru.hackrussia.SMT.MetricsSamples.*;
 
