@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21df2c4c-bc86-41c2-a535-d267a5c45951" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/DBAuthorizationException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/Main.java" afterPath="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/Main.java" />
     </list>
     <ignored path="motion_analyzer.iws" />
@@ -40,11 +41,31 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="87" column="58" selection-start-line="87" selection-start-column="58" selection-end-line="87" selection-end-column="58" />
+            <state relative-caret-position="162">
+              <caret line="32" column="42" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBAuthorizationException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/DBAuthorizationException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InfluxDBFactory.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.influxdb/influxdb-java/2.4/df29bd574ff554b4e3c68ce65d51a01f3da439cc/influxdb-java-2.4-sources.jar!/org/influxdb/InfluxDBFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="33" column="83" selection-start-line="33" selection-start-column="83" selection-end-line="33" selection-end-column="83" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -121,26 +142,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LeftLegVerticalAxis.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/MetricsSamples/LeftLegVerticalAxis.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="8" column="72" selection-start-line="8" selection-start-column="72" selection-end-line="8" selection-end-column="72" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RightLegVerticalAxis.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/MetricsSamples/RightLegVerticalAxis.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="8" column="73" selection-start-line="8" selection-start-column="73" selection-end-line="8" selection-end-column="73" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -474,6 +475,7 @@
         <option value="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/MetricsSamples/StepCounterMetric.java" />
         <option value="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/MetricsSamples/FootsDistance.java" />
         <option value="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/MetricsSamples/WalkDistance.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/DBAuthorizationException.java" />
         <option value="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/Main.java" />
       </list>
     </option>
@@ -1424,10 +1426,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.influxdb/influxdb-java/2.4/df29bd574ff554b4e3c68ce65d51a01f3da439cc/influxdb-java-2.4-sources.jar!/org/influxdb/InfluxDBFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="33" column="83" selection-start-line="33" selection-start-column="83" selection-end-line="33" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/DBAuthorizationException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="87" column="58" selection-start-line="87" selection-start-column="58" selection-end-line="87" selection-end-column="58" />
+        <state relative-caret-position="162">
+          <caret line="32" column="42" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

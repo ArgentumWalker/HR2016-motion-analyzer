@@ -39,6 +39,9 @@ public class Main {
                 InputStream file = new FileInputStream(filename);
                 BVFContent bvf = new BVFContent(file);
                 InfluxDB influxDB = InfluxDBFactory.connect(ip, login, password);
+                if (influxDB == null) {
+                    throw new DBAuthorizationException();
+                }
                 String dbName = "smt";
                 final long time = System.currentTimeMillis();
                 //Simple things
@@ -86,6 +89,9 @@ public class Main {
             }
             catch (BVFParseException e) {
                 System.out.println("Input file parse error");
+            }
+            catch (DBAuthorizationException e) {
+                System.out.println("Authorization error");
             }
             catch (Exception e) {
                 System.out.println("Unknown error");
