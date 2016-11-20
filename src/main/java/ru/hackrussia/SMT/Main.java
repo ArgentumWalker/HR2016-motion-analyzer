@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
+    static final long time = 1479542400000L;
     static public void main(String[] args) {
         if (args.length != 1 && args.length != 4) {
             System.out.println("Wrong number of arguments");
@@ -43,7 +44,6 @@ public class Main {
                     throw new DBAuthorizationException();
                 }
                 String dbName = "smt";
-                final long time = System.currentTimeMillis();
                 //Simple things
                 BatchPoints pts = BatchPoints.database(dbName)
                         .retentionPolicy("autogen")
