@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21df2c4c-bc86-41c2-a535-d267a5c45951" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/DBAuthorizationException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/Main.java" afterPath="$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/Main.java" />
     </list>
     <ignored path="motion_analyzer.iws" />
@@ -41,8 +40,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="32" column="42" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
+            <state relative-caret-position="816">
+              <caret line="97" column="16" selection-start-line="97" selection-start-column="16" selection-end-line="97" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1444,8 +1443,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/hackrussia/SMT/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="32" column="42" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
+        <state relative-caret-position="816">
+          <caret line="97" column="16" selection-start-line="97" selection-start-column="16" selection-end-line="97" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
